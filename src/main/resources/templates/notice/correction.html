@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout}">
+<head>
+    <link th:href="@{/notice/mypage_basic.css}" rel="stylesheet">
+</head>
+<div layout:fragment="content">
+    <div class="blog-content">
+        <div class="main-conten">
+            <div class="sidebar">
+                <div class="profile">
+                    <img src="../img/profile.png" alt="">
+                    <h3>ADIOS</h3>
+                </div>
+                <ul>
+                    <li>
+                        <a href="community_freenotice_board.html" class="active">
+                            <span class="item">자유게시판</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="community_notice_board.html">
+                            <span class="item">공지사항</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="item">이달의 공연 소식</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="item">공연 후기 공유</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="item">문화 공연 관련 정보 제공</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="item">공연 후속 프로그램 소개</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="item">공연 랭킹판/추천</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="item">공연 정보 요청</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div id="sujung-content">
+            <h4>공지사항수정페이지</h4>
+            <div id="sujung-top">
+                <table>
+                    <tr id="first-tr">
+                        <td id="first-td">글 번호</td>
+                        <td>1</td>
+                        <td id="first-td">조회수</td>
+                        <td>15795</td>
+                    </tr>
+                    <tr>
+                        <td id="first-td">작성자</td>
+                        <td>익명1</td>
+                        <td id="first-td">작성시간</td>
+                        <td>2024-02-02 08:24:05</td>
+                    </tr>
+                    <tr>
+                        <td id="first-td">제목</td>
+                        <td colspan="3" id="collaps">
+                            <textarea name="글제목수정" id="suj-sujung" rows="1"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="first-td" class="main-subject">내용</td>
+                        <td colspan="3" id="collaps">
+                <textarea
+                        name="글내용수정"
+                        id="suj-sujung"
+                        rows="20"
+                ></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- <div id="sujung-mid">
+                <div id="main-subject">
+                    <p id="first-td">내용</p>
+                </div>
+                <div id="main-content">
+                    <textarea name="수정" id="m-sujung"></textarea>
+                </div>
+            </div> -->
+            <form id="sujung-btn">
+                <button type="reset" onclick="cancle()">
+                    <a href="community_notice_board.html">목록으로</a>
+                </button>
+                <button type="submit" onclick="return sujung()">
+                    <a href="community_notice_correction.html">수정하기</a>
+                </button>
+                <button type="reset" onclick="delet()">
+                    <a href="community_notice_board.html">삭제하기</a>
+                </button>
+            </form>
+        </div>
+        <!-- ======================FOOTER ---------------------------->
+        <section class="footer">
+            <h4>About us</h4>
+            <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum rem
+                eligendi <br />
+                dicta vel exercitationem dolorum, similique reiciendis asperiores
+                quisquam, officiis, eaque aspernatur impedit ab possimus? Alias quas
+                ipsam sit earum.
+            </p>
+            <div class="icons">
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-instagram"></i>
+            </div>
+            <p>한정교 2조</p>
+        </section>
+    </div>
+</div>
+</html>

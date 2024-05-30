@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout layout:decorate="~{layouts/layout}">
+<head>
+    <link th:href="@{/css/community/boardEditForm.css}" rel="stylesheet">
+
+</head>
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            const errorMessage = [[${errorMessage}]]
+            if(errorMessage){
+                alert(errorMessage);
+            }
+            bindDomEvent();
+        });
+
+        function bindDomEvent(){
+            $(".custom-file-input").on("change", function(){
+                let fileName = $(this).val().split("\\").pop();
+                let fileExt = fileName.substring(fileName.lastIndexOf(".")+1);
+                console.log("fileName =====> ", fileName);
+                console.log("fileExt =====> ", fileExt);
+
+                fileExt = fileExt.toLowerCase();
+
+                if(fileExt != "jpg" && fileExt != "jpeg" && fileExt != "gif" && fileExt != "png" && fileExt != "bmp"){
+                    alert("이미지 파일만 등록이 가능합니다.");
+                    return;
+                }
+                $(this).siblings(".custom-file-label").html(fileName);
+            });
+        }
+    </script>
+</th:block>
+
+<!--<div layout:fragment="content">
+    <div class="blog-content">
+        <form th:action th:object="${boardNoticeFormDTO}" method="POST" enctype="multipart/form-data">
+            <div class="main-content">
+                <div class="sidebar">
+                    <section id="contentgesi">
+                        <div id="read-sb">
+                            <h1>공지사항 수정</h1>
+                            <div>
+                                <p>제목</p>
+                                <input type="text" name="communityTitle" th:value="${boardNoticeFormDTO.noticeTitle}"/>
+                            </div>
+                        </div>
+                        <div id="ge-read-main-ct">
+                            <p>내용</p>
+                            <input name="communityContent" rows="10" cols="50" th:value="${boardNoticeFormDTO.noticeContent}"></input>
+                            <div class="form-group" th:if="${#lists.isEmpty(boardNoticeFormDTO.boardNoticeImgDTO)}">
+                                <div class="custom-file img-div">
+                                    <input type="file" class="custom-file-input" name="noticeImgFile">
+                                    <label class="custom-file-label" th:text="'게시판이미지' + ${num}"></label>
+                                </div>
+                            </div>
+                            <div class="form-group" th:if="${not #lists.isEmpty(boardNoticeFormDTO.boardNoticeImgDTO)}" th:each="noticeImgDTO, index : ${boardNoticeFormDTO.boardNoticeImgDTO}">
+                                <div class="custom-file img-div">
+                                    <input type="file" class="custom-file-input" name="noticeImgFile">
+                                    <input type="hidden" name="noticeImgIds" th:value="${noticeImgDTO.id}">
+                                    <label class="custom-file-label" th:text="${noticeImgDTO.oriImgName != null} ? ${noticeImgDTO.oriImgName} : '게시판이미지' + ${index.index + 1}"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn btn-secondary">수정</button>
+                <button class="btn btn-secondary" th:onclick="|location.href='@{/community/notice/list/}'|" type="button">취소</button>
+            </div>
+        </form>
+    </div>
+</div>
+</html>-->
+<!--<div layout:fragment="content">-->
+<!--    <div class="blog-content">-->
+<!--        <form th:action th:object="${boardNoticeFormDTO}" method="POST"  enctype="multipart/form-data">-->
+<!--            <div class="main-content">-->
+<!--                <section id="contentgesi">-->
+<!--                    &lt;!&ndash; 수정할 게시물 정보 입력 &ndash;&gt;-->
+<!--                    <div id="ge-read-topMenu">-->
+<!--                        <div class="sujung-content">-->
+<!--                            <h1>공지사항 수정</h1>-->
+<!--                            <div id="sujung-top">-->
+<!--                                <table>-->
+<!--                                    <tr id="first-tr">-->
+<!--                                        <td class="first-td">글 번호</td>-->
+<!--                                        <td th:text="${boardNoticeFormDTO.noticeNo}"></td>-->
+<!--                                        <td class="first-td">조회수</td>-->
+<!--                                        <td th:text="${boardNoticeFormDTO.noticeViewCount}"></td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="first-td">작성자</td>-->
+<!--                                        <td th:text="${boardNoticeFormDTO.member.memberNickname}"></td>-->
+<!--                                        <td class="first-td">작성시간</td>-->
+<!--                                        <td th:text="${#temporals.format(boardNoticeFormDTO.regTime,'yyyy-MM-dd')}"></td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="first-td">제목</td>-->
+<!--                                        <td colspan="3" class="collaps">-->
+<!--                                            <input type="text" name="noticeTitle" th:value="${boardNoticeFormDTO.noticeTitle}"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="first-td" id="main-subject">내용</td>-->
+<!--                                        <td colspan="3" class="collaps">-->
+<!--                                            <textarea name="noticeContent" rows="20" cols="115" th:text="${boardNoticeFormDTO.noticeContent}"></textarea></td>-->
+<!--                                    </tr>-->
+<!--                                </table>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; 수정할 내용 입력 &ndash;&gt;-->
+<!--                    <div th:if="${#lists.isEmpty(boardNoticeFormDTO.boardNoticeImgDTO)}">-->
+<!--                        <div class="form-group" th:each="num : ${#numbers.sequence(1,3)}">-->
+<!--                            <div class="custom-file img-div">-->
+<!--                                <input type="file" class="custom-file-input" name="noticeImgFile">-->
+<!--                                <label class="custom-file-label" th:text="'게시판이미지' + ${num}"></label>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div th:if="${not #lists.isEmpty(boardNoticeFormDTO.boardNoticeImgDTO)}">-->
+<!--                        <div class="form-group" th:each="noticeImgDTO, index : ${boardNoticeFormDTO.boardNoticeImgDTO}">-->
+<!--                            <div class="custom-file img-div">-->
+<!--                                <input type="file" class="custom-file-input" name="noticeImgFile">-->
+<!--                                <p>파일버튼</p>-->
+<!--                                <input type="hidden" name="noticeImgIds" th:value="${boardNoticeFormDTO.noticeImgIds}">-->
+
+<!--                                <label class="custom-file-label" th:text="${noticeImgDTO.oriImgName != null}-->
+<!--                    ? ${noticeImgDTO.oriImgName} : '게시판이미지' + ${index.index + 1}"></label>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+
+
+<!--                    &lt;!&ndash; 수정 버튼 &ndash;&gt;-->
+
+<!--                    <button class="btn btn-secondary" th:onclick="|location.href='@{/community/notice/list/}'|"-->
+<!--                            type="button">취소</button>-->
+<!--                    <button type="submit" class="btn btn-secondary"  sec:authorize="hasAnyAuthority('ROLE_ADMIN')">수정</button>-->
+<!--                </section>-->
+
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</html>-->
+<div layout:fragment="content">
+    <div class="blog-content">
+        <form th:action th:object="${boardNoticeFormDTO}" method="POST"  enctype="multipart/form-data">
+            <input type="hidden" th:value="${id}" >
+            <div class="main-content">
+                <section id="contentgesi">
+                    <!-- 수정할 게시물 정보 입력 -->
+                    <div id="ge-read-topMenu">
+                        <p>글 수정페이지</p>
+                        <div id="read-sb">
+                            <p>제목:<input th:value="${boardNoticeFormDTO.noticeTitle}" name="noticeTitle" class="form-control"></p>
+                            <p class="read-sb"
+                               th:text="${boardNoticeFormDTO.member.memberNickname}+' | '+'조회수 '+${boardNoticeFormDTO.noticeViewCount}+' | '+${#temporals.format(boardNoticeFormDTO.regTime,'yyyy-MM-dd HH:mm')}"></p>
+                        </div>
+                    </div>
+                    <!-- 사이에 목록버튼 만들기 -->
+                    <!-- 메인 내용, 댓글올라는곳 -->
+
+                    <div id="ge-read-main-ct">
+                        <div class="overflow-container">
+                            <p>내용:<textarea th:text="${boardNoticeFormDTO.noticeContent}" name="noticeContent" class="form-control"></textarea></p>
+                        </div>
+
+                        <!-- 수정할 내용 입력 -->
+                        <div th:if="${#lists.isEmpty(boardNoticeFormDTO.boardNoticeImgDTO)}">
+                            <div class="form-group" th:each="num : ${#numbers.sequence(1,3)}">
+                                <div class="custom-file img-div">
+                                    <input type="file" class="custom-file-input" name="noticeImgFile">
+                                    <label class="custom-file-label" th:text="'게시판이미지' + ${num}"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div th:if="${not #lists.isEmpty(boardNoticeFormDTO.boardNoticeImgDTO)}">
+                            <div class="form-group" th:each="noticeImgDTO, index : ${boardNoticeFormDTO.boardNoticeImgDTO}">
+                                <div class="custom-file img-div">
+                                    <input type="file" class="custom-file-input" name="noticeImgFile">
+                                    <p>파일버튼</p>
+                                    <input type="hidden" name="noticeImgIds" th:value="${noticeImgDTO.id}">
+
+                                    <label class="custom-file-label" th:text="${noticeImgDTO.oriImgName != null}
+                    ? ${noticeImgDTO.oriImgName} : '게시판이미지' + ${index.index + 1}"></label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- 수정 버튼 -->
+
+                        <div id="btn">
+                            <button class="btn btn-secondary" th:onclick="|location.href='@{/community/notice/list/}'|"
+                                    type="button">취소</button>
+                            <button type="submit" class="btn btn-secondary">수정</button>.
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </form>
+    </div>
+</div>
+</html>

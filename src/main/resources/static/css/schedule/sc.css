@@ -1,0 +1,97 @@
+* {
+  margin: 0 ;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+/* 상단 메뉴 */
+#main {
+  text-align: center;
+}
+#menutop {
+  display: inline-block;
+  width: 90%;
+}
+
+#menutop ul {
+  width: 100%;
+  display: flex;
+  border-radius: 20px;
+}
+.free {
+  width: 750px;
+  color: #666666;
+  font-size: 20px;
+  background-color: rgb(220, 220, 220);
+
+  cursor: pointer;
+  height: 40px;
+}
+#fr1{
+  border-top-left-radius: 10px;
+}
+#fr2{
+  border-top-right-radius: 10px;
+  margin-left: 1px;
+}
+.free:last-child{
+  margin-left: 1px;
+}
+.free:hover{
+  background-color: rgb(0, 111, 154);
+  color: white;
+
+}
+#menu ul li ul {
+  display: none;
+}
+
+/* 메인 메뉴 */
+#menu {
+  display: block;
+}
+#menu > ul {
+  display: flex;
+  background-color: white;
+}
+
+#menu li {
+  margin-top: 20px;
+  margin-left: 10%;
+  list-style: none;
+  font-size: 20px;
+  width: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#menu ul li:hover {
+  background-color: rgb(0, 111, 154);
+  color: white;
+}
+#menu > ul > li:first-child{
+  margin-left: 0;
+}
+.sub{
+  display: flex;
+  margin-top: 10px;
+}
+
+.sub li {
+  border: 1px solid black;
+  margin-left: 20px;
+  padding: 10px;border-radius: 10px;
+  cursor: pointer;
+}
+
+.active{
+  background-color: rgb(0, 111, 154);
+  color: white;}
+
+input[type="radio"]:checked+ label {
+  background-color: rgb(0, 111, 154);
+  color: white;
+}
+label{
+  width: 100%;
+}

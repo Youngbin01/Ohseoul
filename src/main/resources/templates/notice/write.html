@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout}">
+<head>
+    <link th:href="@{/notice/mypage_basic.css}" rel="stylesheet">
+</head>
+<div layout:fragment="content">
+    <div class="blog-content">
+        <div class="main-conten">
+
+
+            <div class="sidebar">
+                <div class="profile">
+                    <img src="../img/profile.png" alt="">
+                    <h3>ADIOS</h3>
+
+                </div>
+                <ul>
+                    <li>
+                        <a href="community_freenotice_board.html" class="active">
+                            <span class="item">자유게시판</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="community_notice_board.html">
+
+                            <span class="item">공지사항</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">이달의 공연 소식</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 후기 공유</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">문화 공연 관련 정보 제공</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 후속 프로그램 소개</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 랭킹판/추천</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 정보 요청</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+
+        <div id="write-area">
+            <h4>글을 작성하는 공간입니다.</h4>
+            <form >
+                <div id="maintitle">
+                    <textarea name="title" id="utitle" rows="1" cols="55" placeholder="제목" maxlength="100" required></textarea>
+                </div>
+                <div id="content-in">
+                    <textarea name="content" id="ucontent" placeholder="내용" rows="25" required></textarea>
+                </div>
+                <input type="file" name="SelectFile">
+                <div id="inputbt">
+                    <button type="submit" id="inputbtt"><a href="community.html">취소</a></button>
+                    <button type="submit" id="inputbtt"><a href="community.html">글작성</a></button>
+                    <!-- <button type="submit" id="inputbtt">글 작성</button> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

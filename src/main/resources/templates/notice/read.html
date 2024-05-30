@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout}">
+<head>
+    <link th:href="@{/notice/mypage_basic.css}" rel="stylesheet">
+</head>
+<div layout:fragment="content">
+    <div class="blog-content">
+        <div class="main-conten">
+            <div class="sidebar">
+                <div class="profile">
+                    <img src="../img/profile.png" alt="">
+                    <h3>ADIOS</h3>
+                </div>
+                <ul>
+                    <li>
+                        <a href="community_freenotice_board.html" class="active">
+                            <span class="item">자유게시판</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="community_notice_board.html">
+
+                            <span class="item">공지사항</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">이달의 공연 소식</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 후기 공유</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">문화 공연 관련 정보 제공</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 후속 프로그램 소개</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 랭킹판/추천</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 정보 요청</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /* --------------css위치------------------gesipan read-------------------------- */ -->
+        <section id="contentgesi">
+            <!-- 들어가는거 제목, 누가썻는지, 날짜, 조회수 -->
+            <div id="ge-read-topMenu">
+                <div id="read-sb">
+                    <h1>공지사항</h1>
+                    <p id="coment"><a href="gonjisujungFinal.html">user-id</a></p>
+                    <p>조회수 15184</p>
+                    <p>댓글 5</p>
+                    <p>2024년01월01일</p>
+
+                </div>
+            </div>
+            <!-- 사이에 목록버튼 만들기 -->
+            <!-- 메인 내용, 댓글올라는곳 -->
+
+            <div id="ge-read-main-ct">
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique
+                    repellendus possimus et vel sequi labore? Cumque vel incidunt et
+                    magnam ducimus, nesciunt labore quos eius consequatur minima facere
+                    beatae velit. Dicta et qui ipsa earum, iure similique? Incidunt
+                    quisquam, sunt repellendus fugit provident laborum maiores, quas
+                    quam quis amet repellat doloremque. Corrupti atque inventore
+                    eligendi consequuntur optio repellat culpa laudantium! Ratione,
+                    est!>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Similique repellendus possimus et vel sequi labore? Cumque vel
+                    incidunt et magnam ducimus, nesciunt labore quos eius consequatur
+                    minima facere beatae velit. Dicta et qui ipsa earum, iure similique?
+                    Incidunt quisquam, sunt repellendus fugit provident laborum maiores,
+                    quas quam quis amet repellat doloremque. Corrupti atque inventore
+                    eligendi consequuntur optio repellat culpa laudantium! Ratione, est!
+                </p>
+            </div>
+            <!-- 댓글목록 -->
+            <div id="ge-read-btnMenu">
+                <textarea name="댓글창" id="datgletext" cols="50" rows="5"></textarea>
+                <button
+                        type="submit"
+                        name="등록"
+                        id="datglebut"
+                        onclick="return datglejaksung()"
+                >
+                    <a href="">등록</a>
+                </button>
+            </div>
+        </section>
+    </div>
+</div>
+</html>

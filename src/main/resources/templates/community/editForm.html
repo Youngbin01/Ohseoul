@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <link th:href="@{/css/community/boardEditForm.css}" rel="stylesheet">
+</head>
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            const errorMessage = [[${errorMessage}]]
+            if(errorMessage){
+                alert(errorMessage);
+            }
+            bindDomEvent();
+        });
+
+        function bindDomEvent(){
+            $(".custom-file-input").on("change", function(){
+                let fileName = $(this).val().split("\\").pop();
+                let fileExt = fileName.substring(fileName.lastIndexOf(".")+1);
+                console.log("fileName =====> ", fileName);
+                console.log("fileExt =====> ", fileExt);
+
+                fileExt = fileExt.toLowerCase();
+
+                if(fileExt != "jpg" && fileExt != "jpeg" &&
+                    fileExt != "gif" && fileExt != "png" && fileExt != "bmp"){
+                    alert("이미지 파일만 등록이 가능합니다.");
+                    return;
+                }
+                $(this).siblings(".custom-file-label").html(fileName);
+            });
+        }
+
+    </script>
+</th:block>
+
+<div layout:fragment="content">
+    <div class="blog-content">
+        <form th:action th:object="${boardCommunity}" method="POST"  enctype="multipart/form-data">
+            <div class="main-content">
+                    <section id="contentgesi">
+                        <!-- 수정할 게시물 정보 입력 -->
+                        <div id="ge-read-topMenu">
+                            <p>글 수정페이지</p>
+                            <div id="read-sb">
+                                <p>제목:<input th:value="${boardCommunity.communityTitle}"  name="communityTitle" class="form-control"></p>
+                                <p class="read-sb"
+                                   th:text="${boardCommunity.member.memberNickname}+' | '+'조회수 '+${boardCommunity.communityViewCount}+' | '+${#temporals.format(boardCommunity.regTime,'yyyy-MM-dd HH:mm')}"></p>
+                            </div>
+                        </div>
+                        <!-- 사이에 목록버튼 만들기 -->
+                        <!-- 메인 내용, 댓글올라는곳 -->
+
+                        <div id="ge-read-main-ct">
+                            <div class="overflow-container">
+                                <p>내용:<textarea th:text="${boardCommunity.communityContent}" name="communityContent" class="form-control"></textarea></p>
+                            </div>
+
+                        <!-- 수정할 내용 입력 -->
+                            <div th:if="${#lists.isEmpty(boardCommunity.boardCommunityImgDTOList)}">
+                                <div class="form-group" th:each="num : ${#numbers.sequence(1,3)}">
+                                    <div class="custom-file img-div">
+                                        <input type="file" class="custom-file-input" name="boardCommunityImgFile">
+                                        <label class="custom-file-label" th:text="'게시판이미지' + ${num}"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <div th:if="${not #lists.isEmpty(boardCommunity.boardCommunityImgDTOList)}">
+                            <div class="form-group" th:each="boardImgDTO, index : ${boardCommunity.boardCommunityImgDTOList}">
+                                <div class="custom-file img-div">
+                                    <input type="file" class="custom-file-input" name="boardImgFile">
+                                    <p>파일버튼</p>
+                                    <input type="hidden" name="boardImgIds" th:value="${boardImgDTO.id}">
+
+                                    <label class="custom-file-label" th:text="${boardImgDTO.oriImgName != null}
+                    ? ${boardImgDTO.oriImgName} : '게시판이미지' + ${index.index + 1}"></label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- 수정 버튼 -->
+
+                            <div id="btn" sec:authorize="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
+                                <button class="btn btn-secondary" th:onclick="|location.href='@{/community/board/list/}'|"
+                                        type="button"
+                                        sec:authorize="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">취소</button>
+                                <button type="submit" class="btn btn-secondary" sec:authorize="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">수정</button>.
+                            </div>
+
+                        </div>
+                    </section>
+            </div>
+        </form>
+    </div>
+</div>
+</html>

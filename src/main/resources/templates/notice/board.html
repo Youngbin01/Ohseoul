@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout}">
+<head>
+    <link th:href="@{/notice/mypage_basic.css}" rel="stylesheet">
+</head>
+<div layout:fragment="content">
+    <div class="blog-content">
+        <div class="main-conten">
+
+
+
+            <div class="sidebar">
+                <div class="profile">
+                    <img src="../img/profile.png" alt="">
+                    <h3>ADIOS</h3>
+
+                </div>
+                <ul>
+                    <li>
+                        <a href="community_freenotice_board.html" class="active">
+                            <span class="item">자유게시판</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="community_notice_board.html">
+
+                            <span class="item">공지사항</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">이달의 공연 소식</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 후기 공유</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">문화 공연 관련 정보 제공</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 후속 프로그램 소개</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 랭킹판/추천</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+
+                            <span class="item">공연 정보 요청</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+
+        </div>
+        <div id="gesipan">
+            <div id="Menutop">
+                <div id="M-top">
+                    <h1>공지사항</h1>
+                    <p><b>공지사항 글입니다.</b></p>
+                    <select id="uilist" name="uilist" title="직업선택" class="ui-select">
+                        <option value="제목">제목</option>
+                        <option value="작성자">작성자</option>
+                        <option value="내용">내용</option>
+                </div>
+                </select>
+                <input type="text">
+                <input type="submit" value="검색" onclick="" >
+            </div>
+            <div id="middlecontent">
+                <table id="table1">
+                    <tr>
+                        <td id="table">번호</td>
+                        <td id="table" class="holy">제목</td>
+                        <td id="table">글쓴이</td>
+                        <td id="table">작성일</td>
+                        <td id="table">조회수</td>
+
+                    </tr>
+                    <tr >
+                        <th id="table">1</th>
+                        <th id="table" class="holy"><a href="community_notice_read.html">A</a></th>
+                        <th id="table">익명1</th>
+                        <th id="table">2024-02-02</th>
+                        <th id="table">100</th>
+                    </tr>
+                    <tr >
+                        <th id="table">2</th>
+                        <th id="table" class="holy">B</th>
+                        <th id="table">익명2</th>
+                        <th id="table">2023-02-02</th>
+                        <th id="table">156</th>
+                    </tr>
+                    <tr>
+                        <th id="table">3</th>
+                        <th id="table" class="holy">C</th>
+                        <th id="table">익명3</th>
+                        <th id="table">2022-02-02</th>
+                        <th id="table">10</th>
+                    </tr>
+                    <tr>
+                        <th id="table">4</th>
+                        <th id="table" class="holy">D</th>
+                        <th id="table">익명4</th>
+                        <th id="table">2019-02-02</th>
+                        <th id="table">1432</th>
+                    </tr>
+                    <tr>
+                        <th id="table">5</th>
+                        <th id="table" class="holy">E</th>
+                        <th id="table">익명5</th>
+                        <th id="table">2018-02-02</th>
+                        <th id="table">1321</th>
+                    </tr>
+                    <tr>
+                        <th id="table">6</th>
+                        <th id="table" class="holy">F</th>
+                        <th id="table">익명6</th>
+                        <th id="table">2017-02-02</th>
+                        <th id="table">1005</th>
+                    </tr>
+                    <tr>
+                        <th id="table">7</th>
+                        <th id="table" class="holy">G</th>
+                        <th id="table">익명7</th>
+                        <th id="table">2015-02-02</th>
+                        <th id="table">100</th>
+                    </tr>
+                    <tr>
+                        <th id="table">8</th>
+                        <th id="table" class="holy">H</th>
+                        <th id="table">익명8</th>
+                        <th id="table">2014-02-02</th>
+                        <th id="table">1231</th>
+                    </tr>
+                    <tr>
+                        <th id="table">9</th>
+                        <th id="table" class="holy">I</th>
+                        <th id="table">익명9</th>
+                        <th id="table">2013-02-02</th>
+                        <th id="table">132</th>
+                    </tr>
+                    <tr>
+                        <th id="table">10</th>
+                        <th id="table" class="holy">J</th>
+                        <th id="table">익명10</th>
+                        <th id="table">2012-02-02</th>
+                        <th id="table">1551</th>
+                    </tr>
+
+                </table>
+            </div>
+            <div id="numberpage">
+                <!-- <ul>
+                    <li id="first1"><a href="">처음</a></li>
+                    <li><a href="">[1]</a></li>
+                    <li><a href="">[2]</a></li>
+                    <li><a href="">[3]</a></li>
+                    <li><a href="">[4]</a></li>
+                    <li><a href="">[5]</a></li>
+                    <li><a href="">다음</a></li>
+                    <li><a href="">마지막</a></li>
+                </ul> -->
+                <button type="submit" id="newwrite" ><a href="@{/community/board/write}">글쓰기</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

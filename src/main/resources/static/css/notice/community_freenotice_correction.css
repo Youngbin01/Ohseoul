@@ -1,0 +1,83 @@
+#sujung-content {
+  width: 68%;
+  height: 100%;
+  display: inline-block;
+}
+#sujung-content h4 {
+  border-bottom: 2px solid black;
+  text-align: center;
+  width: 100%;
+}
+#sujung-mid {
+  display: flex;
+  height: 70%;
+  width: 81%;
+  /* border: 1px solid blue; */
+}
+.main-subject {
+  height: 100%;
+  /* border: 1px solid saddlebrown; */
+}
+#sujung-top {
+  margin-left: 20%;
+}
+#sujung-top table tr td {
+  text-align: left;
+  padding-left: 10px;
+  border-bottom: 1px solid #ccc;
+  height: 10%;
+  width: 20%;
+}
+
+#main-subject {
+  width: 15.7%;
+  background-color: #e2e2e2;
+}
+#first-td {
+  background-color: #e2e2e2;
+}
+#suj-sujung {
+  width: 90%;
+  margin-left: 30px;
+}
+#sujung-btn button {
+  background-color: #57aed1;
+  margin-top: 10px;
+  border-radius: 10%;
+  float: right;
+  margin-right: 5px;
+  width: 80px;
+  height: 30px;
+}
+#sujung-btn button a {
+  color: white;
+  font-weight: 300;
+  text-decoration: none;
+}
+@media (max-width: 720px) {
+  .main-conten {
+    display: none;
+  }
+  #M-top h1 {
+    margin-left: -100px;
+  }
+  #M-top p {
+    margin-left: -60px;
+  }
+  #M-top select {
+    margin-left: -0px;
+  }
+  #ge-read-main-ct {
+    margin-left: 70px;
+  }
+  #sujung-content {
+    margin-left: 40px;
+    width: 90%;
+  }
+  #sujung-content h4 {
+    width: 100%;
+  }
+  #sujung-top {
+    margin-left: 0%;
+  }
+}

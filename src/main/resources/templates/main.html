@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/basic/project.css">
+
+
+
+
+
+</head>
+
+<body>
+<section class="header">
+
+    <nav>
+        <a href="index.html"></a>
+        <div class="nav-links" id="navLinks">
+
+            <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/schedule">schedule</a></li>
+                <li><a href="/community/board/list/">Community</a></li>
+                <li><a href="/community/notice/list">Notice</a></li>
+                <li sec:authorize="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')"><a href="/mypage">Mypage</a></li>
+                <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="/admin/list/">Admin</a></li>
+                <li sec:authorize="isAnonymous()"><a href="/member/login">로그인</a></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/members/logout">로그아웃</a></li>
+            </ul>
+        </div>
+        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+
+    </nav>
+    <div class="text-box" id="text-box">
+        <h1>찬란한 문화 예술의 도시 서울</h1>
+        <p>서울은 한국의 도시 중에서도 가장 다양하고 활기찬 문화 예술의 무대입니다. 뮤지컬, 연극, 클래식, 국악, 오페라, 무용, 전시, 축제 등 <br>서울의 문화예술 공연은 시민들의 삶에 풍요와 색깔을 더해줍니다. Sesons of Seoul 에서 다양한 서울의 문화예술공연 정보를 살펴보세요!
+
+        </p>
+        <a href="about.html" class="hero-btn">visit us to know more</a>
+    </div>
+</section>
+
+
+<!-- ----------------------------------------community--------------------- -->
+<section class="community">
+    <h1>In the community</h1>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id, distinctio sit dicta doloribus unde laborum
+        nemo in aliquam reprehenderit iusto, commodi architecto iure adipisci corrupti? Labore, modi! Cumque,
+        pariatur quidem!</p>
+
+    <div class="row">
+        <div class="community-col">
+            <img src="images/basic/communicate.jpg" alt="">
+            <h3>공연정보</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum incidunt illo sed sunt velit mollitia
+                repellat</p>
+
+        </div>
+        <div class="community-col">
+            <img src="images/basic/chatting.jpg" alt="">
+            <h3>커뮤니티</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum incidunt illo sed sunt velit mollitia
+                repellat</p>
+
+        </div>
+        <div class="community-col">
+            <img src="images/basic/gathering.jpg" alt="">
+            <h3>내 공연 즐겨찾기</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum incidunt illo sed sunt velit mollitia
+                repellat</p>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- --------------------------------------------call to action--------------------------------- -->
+<section class="cta">
+    <h1>Seasons of seoul 과 서울의<br>문화예술 정보를 공유해보세요</h1>
+    <a href="" class="hero-btn">Contact us</a>
+</section>
+
+<!-- ======================FOOTER ---------------------------->
+<section class="footer">
+    <h4>About us</h4>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum rem eligendi <br> dicta vel exercitationem
+        dolorum, similique reiciendis asperiores quisquam, officiis, eaque aspernatur impedit ab possimus? Alias
+        quas ipsam sit earum.</p>
+    <div class="icons">
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+    </div>
+    <p>한정교 2조</p>
+</section>
+
+
+
+<!-- ----------------------------------------------JAVA SCRIPT FOR TOGGLE MENU----------------- -->
+<script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+    function hideMenu() {
+        navLinks.style.right = "-200px";
+    }
+
+
+    var a = document.getElementById("loginBtn");
+    var b = document.getElementById("registerBtn");
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+
+    function login() {
+        x.style.left = "4px"
+        y.style.right = "-520px"
+        a.className += " white-btn";
+        b.className = "btn";
+        x.style.opacity = 1;
+        y.style.opacity = "0";
+    }
+
+    function register() {
+        x.style.left = "-510px"
+        y.style.right = "5px"
+        a.className = "btn";
+        b.className += " white-btn"
+        x.style.opacity = 0;
+        y.style.opacity = 1;
+    }
+
+    // ---------------------------------로그인 후 내계정 있는 페이지로 redirect---------------------------
+
+    function afterLogin() {
+        // 여기에 로그인 검증 로직을 추가합니다.
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // 예시: 간단한 로그인 검증
+        if (username === "keduit" && password === "1234") {
+            // 로그인이 성공하면 다른 페이지로 리디렉트합니다.
+            window.location.href = "01_afterlogin_test.html"; // 리디렉트할 페이지의 URL을 여기에 입력하세요.
+        } else {
+            // 로그인 실패 처리를 추가할 수 있습니다.
+            alert("로그인에 실패했습니다. 올바른 사용자 이름과 비밀번호를 입력하세요.");
+        }
+    }
+    //----------------------------로드 되면 textbox fade-in------------------------
+    window.addEventListener('load', function() {
+        var textBox = document.querySelector('.text-box');
+        textBox.style.opacity = '1'; // 페이지가 로드되면 opacity를 1로 변경하여 fade-in 효과를 줌
+    });
+
+</script>
+<script src="https://kit.fontawesome.com/ba381d0ff2.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

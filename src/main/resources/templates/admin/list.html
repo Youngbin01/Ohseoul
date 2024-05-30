@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <script src="/js/admin/search.js"></script>
+    <link href="/css/admin/admin.css" rel="stylesheet">
+</head>
+<div layout:fragment="content">
+
+
+
+
+        <h1 id="userlist">유저 리스트(관리자 포함)</h1>
+        <form action="#" role="form" method="get" class="search-form">
+            <input type="text" id="nickName" name="nickName">
+            <button name="search" class="btn btn-primary">검색</button>
+        </form>
+        <table class="table" id="mx">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">이름</th>
+                <th scope="col">이메일</th>
+                <th scope="col">권한</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${membersPage.content}">
+                <td th:text="${member.memberNo}"></td>
+                <td><a th:text="${member.memberNickname}" th:href="@{/admin/view(memberNo=${member.memberNo})}"></a></td>
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.role}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 페이징 링크 추가 -->
+        <div th:if="${membersPage.totalPages > 1}" class="pagination">
+            <ul>
+                <li th:if="${membersPage.hasPrevious()}">
+                    <a th:href="@{/admin/list/(page=${membersPage.number - 1}, size=${membersPage.size})}">&laquo; 이전</a>
+                </li>
+                <li th:each="pageNumber : ${#numbers.sequence(0, membersPage.totalPages - 1)}" th:class="${membersPage.number == pageNumber} ? 'active'">
+                    <a th:href="@{/admin/list/(page=${pageNumber}, size=${membersPage.size})}" th:text="${pageNumber + 1}"></a>
+                </li>
+                <li th:if="${membersPage.hasNext()}">
+                    <a th:href="@{/admin/list/(page=${membersPage.number + 1}, size=${membersPage.size})}">다음 &raquo;</a>
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+</html>

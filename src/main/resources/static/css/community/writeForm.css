@@ -1,0 +1,57 @@
+/* 전체 폼 영역 */
+#write-area {
+    margin: 20px;
+}
+
+/* 글 제목 입력란 스타일 */
+#maintitle {
+    margin-bottom: 20px;
+}
+
+/* 글 제목 입력란의 입력 그룹 스타일 */
+#maintitle .input-group-text {
+    width: 80px; /* 제목 입력란 왼쪽의 고정 너비 설정 */
+}
+
+/* 글 내용 입력란 스타일 */
+#content-in textarea {
+    resize: vertical; /* 세로 크기 조정 허용 */
+    min-height: 200px; /* 최소 세로 높이 지정 */
+}
+
+/* 파일 업로드 입력란 스타일 */
+.custom-file {
+    margin-bottom: 20px; /* 입력란 아래 여백 설정 */
+}
+
+/* 버튼 영역 스타일 */
+#inputbt {
+    margin-top: 20px; /* 버튼 영역 위 여백 설정 */
+}
+
+/* 취소 버튼 스타일 */
+#inputbtt[type="reset"] {
+    background-color: #e74c3c; /* 배경색 설정 */
+    color: white; /* 글자색 설정 */
+    border: none; /* 테두리 제거 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    cursor: pointer; /* 마우스 커서 모양 변경 */
+    margin-right: 10px; /* 우측 여백 설정 */
+}
+
+/* 글 작성 버튼 스타일 */
+#inputbt button[type="submit"] {
+    background-color: #2ecc71; /* 배경색 설정 */
+    color: white; /* 글자색 설정 */
+    border: none; /* 테두리 제거 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    cursor: pointer; /* 마우스 커서 모양 변경 */
+}
+/* 글 내용 입력란 스타일 */
+#content-in {
+    margin-bottom: 5%; /* 내용 입력란 아래 여백 설정 */
+}
+
+#inputbt {
+    text-align: right; /* 버튼을 오른쪽으로 정렬 */
+}

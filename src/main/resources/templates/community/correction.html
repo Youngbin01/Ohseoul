@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <link th:href="@{/community/css/mypage_basic.css}" rel="stylesheet">
+</head>
+<div layout:fragment="content">
+    <div class="blog-content">
+        <form action="/community/board/view/update/${boardCommunity.communityNo}" method="PUT">
+            <div class="main-content">
+                <div class="sidebar">
+                    <section id="contentgesi">
+                        <!-- 수정할 게시물 정보 입력 -->
+                        <div id="ge-read-topMenu">
+                            <div id="read-sb">
+                                <h1>자유게시판</h1>
+                                <p id="coment">
+                                    <input type="text" name="communityTitle" th:value="${boardCommunity.communityTitle}">
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 수정할 내용 입력 -->
+                        <div id="ge-read-main-ct">
+                            <textarea name="communityContent" rows="10" cols="50" th:text="${boardCommunity.communityContent}"></textarea>
+                        </div>
+                        <!-- 수정 버튼 -->
+                        <button type="submit" sec:authorize="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">수정</button>
+                    </section>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>장바구니</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+
+        function deleteCartItem(obj){
+                const cartItemId=obj.dataset.id;
+                const token=$("meta[name='_csrf']").attr("content");
+                const header=$("meta[name='_csrf_header']").attr("content");
+                const url="/cartItem/"+cartItemId;
+
+                $.ajax({
+                    url:url,
+                    type:"DELETE",
+                    beforeSend:function(xhr){
+                        xhr.setRequestHeader(header, token);
+                       },
+                      dataType:"json",
+                      cache:false,
+                      success:function(result, status){
+                        alert("장바구니 상품을 삭제했습니다.");
+                        location.href='/cart';
+                        },
+                        error: function(jqXHR, status, error){
+                            if(jqXHR.status =='401'){
+                                alert("로그인 후 사용해주세요");
+                                location.href='/member/login';
+
+                              }else{
+                                alert(jqXHR.responseJSON.message)
+                              }
+                              }
+                              })
+
+              };
+
+
+function deleteAllCartItems() {
+    const token = $("meta[name='_csrf']").attr("content");
+    const header = $("meta[name='_csrf_header']").attr("content");
+    const url = "/cart"; // URL 수정
+
+    $.ajax({
+        url: url,
+        type: "DELETE",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        dataType: "text",
+        cache: false,
+        success: function(result, status) {
+            alert("장바구니 상품을 모두 삭제했습니다.");
+            location.reload(); // 페이지 새로고침
+        },
+        error: function(jqXHR, status, error) {
+            if (jqXHR.status == '401') {
+                alert("로그인 후 사용해주세요");
+                location.href = '/member/login';
+            } else {
+                alert(jqXHR.responseJSON.message);
+            }
+        }
+    });
+}
+    </script>
+    <script>
+        function goToDetailPage(obj){
+            const performanceId = obj.dataset.id;
+            location.href = "/schedule/" + performanceId;
+        }
+    </script>
+
+
+    <style>
+        /* 기본 스타일 */
+ body {
+   font-family: 'Noto Sans KR', sans-serif;
+   background-color: #f2f2f2;
+   color: #333;
+   margin: 0;
+   padding: 0;
+ }
+
+ .cart-container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   padding: 20px;
+ }
+
+ .cart-item {
+   border: 1px solid #ddd;
+   margin: 10px;
+   padding: 15px;
+   width: calc(25% - 20px);
+   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+   transition: transform 0.3s ease;
+ }
+
+ .cart-item:hover {
+   transform: translateY(-5px);
+ }
+
+ .cart-image {
+   max-width: 100%;
+   height: auto;
+   display: block;
+   margin-bottom: 15px;
+   cursor: pointer;
+ }
+
+ .cart-info {
+   margin-bottom: 15px;
+ }
+
+ .cart-title {
+   font-size: 1.2em;
+   font-weight: bold;
+   margin-bottom: 5px;
+ }
+
+ .cart-date,
+ .cart-place {
+   font-size: 0.9em;
+   color: #666;
+ }
+
+ /* 버튼 스타일 */
+ .btn {
+   display: inline-block;
+   color: #fff;
+   background-color: #555;
+   text-decoration: none;
+   padding: 8px 16px;
+   font-size: 14px;
+   border-radius: 4px;
+   transition: background-color 0.3s, color 0.3s;
+   border: 2px solid #555;
+ }
+
+ .btn:hover {
+   background-color: #333;
+   border-color: #333;
+ }
+
+ /* 전체 삭제 버튼 스타일 */
+ #delete-all-btn {
+   color: #fff;
+   background-color: #555;
+   padding: 8px 16px;
+   margin: 10px 32px;
+   font-size: 14px;
+   border-radius: 4px;
+   border: 2px solid #555;
+   cursor: pointer;
+   transition: background-color 0.3s, border-color 0.3s;
+ }
+
+ #delete-all-btn:hover {
+   background-color: #333;
+   border-color: #333;
+ }
+         .cart-image {
+
+     cursor: pointer; /* 손가락 표시를 추가합니다 */
+ }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="select-all-container">
+        <button id="delete-all-btn" onclick="deleteAllCartItems()">전체 삭제</button>
+    </div>
+    <div class="cart-container" th:if="${!cartItems.empty}">
+        <div th:each="cartItem : ${cartItems}" class="cart-item">
+            <button class="close" type="button" aria-label="Close">
+                            <span aria-hidden="true" th:data-id="${cartItem.cartItemId}"
+                                  onclick="deleteCartItem(this)">&times</span>
+            </button>
+            <label th:for="'item-' + ${cartItem.cartItemId}"></label>
+            <img th:src="${cartItem.main_img}" alt="공연 이미지" class="cart-image" th:data-id="${cartItem.eventId}"
+                 onclick="goToDetailPage(this)"/>
+
+            <div class="cart-info">
+                <div class="cart-title" th:text="${cartItem.title}">공연 제목</div>
+                <div class="cart-date" th:text="${cartItem.date}">날짜</div>
+                <div class="cart-place" th:text="${cartItem.place}">장소</div>
+            </div>
+        </div>
+    </div>
+    <div th:if="${cartItems.empty}">
+        <p>장바구니에 아이템이 없습니다.</p>
+    </div>
+</div>
+
+</body>
+</html>

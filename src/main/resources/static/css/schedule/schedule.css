@@ -1,0 +1,136 @@
+/* 전체 컨테이너 스타일 */
+.event-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px; /* 공연 간격 조정 */
+    margin-top: 40px; /* form태그와의 간격 조정 */
+}
+
+/* 각 이벤트 스타일 */
+.event {
+    width: calc(25% - 30px); /* gap을 고려한 너비 설정 */
+    margin-bottom: 20px;
+    padding: 15px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.event:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 이벤트 이미지 스타일 */
+.event-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+}
+
+/* 이벤트 제목 스타일 */
+.event-title {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 이벤트 날짜 스타일 */
+.event-date {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* select 항목 스타일 */
+select {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+select:hover {
+    background-color: #e9ecef;
+}
+
+select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* 검색창 스타일 */
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:hover {
+    background-color: #e9ecef;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* 검색 버튼 스타일 */
+#searchBtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#searchBtn:hover {
+    background-color: #0056b3;
+}
+
+/* 페이징 처리 스타일 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin-top: 20px; /* 페이지네이션 위치 조정 */
+}
+
+.pagination a {
+    padding: 8px 16px;
+    margin: 0 4px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a.active, .pagination a:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination .current-page {
+    font-weight: bold;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+}
+form{
+margin-top: 30px;
+margin-left: 15px
+}

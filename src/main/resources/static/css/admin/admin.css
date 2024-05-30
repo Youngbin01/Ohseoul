@@ -1,0 +1,56 @@
+#mx{
+  width: 70%;
+    margin-left: 15%;
+}
+
+#userlist{
+  margin: 10px 0 30px;
+  text-align: center;
+}
+.search-form {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+    margin-left: -15%;
+}
+.search-form #nickName{
+  height: 35px;
+  margin-right: 5px;
+  border-radius: 5px;
+	border: 1px solid #666;
+}
+.search-form button {
+	height: 35px;
+}
+.pagination ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination ul li {
+  margin: 0 5px; /* 필요한 간격 조정 */
+}
+
+.pagination ul li a {
+  text-decoration: none;
+  padding: 5px 10px;
+
+}
+
+.pagination{
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
+
+th{
+  text-align: center;
+}
+
+td{
+  text-align: center;
+}

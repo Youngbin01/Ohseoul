@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout}">
+<head>
+    <link  th:href="@{/css/community/boardList.css}"  rel="stylesheet" type="text/css">
+    <script src="/js/notice/noticeList.js"></script>
+</head>
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        document.getElementById("write-button").addEventListener("click", function() {
+            window.location.href = "/community/notice/new";
+        });
+
+        $(document).ready(function () {
+            $('#searchBtn').on("click", function (e) {
+                e.preventDefault();
+                page(0);
+            })
+        });
+
+        function page(page) {
+            const searchCriteria = $("#searchCriteria").val(); // 검색 기준
+            const searchQuery = $("input[name='searchQuery']").val(); // 검색어
+
+
+            let searchCreatedBy = "";
+            let searchCommunityContent = "";
+            let searchName = "";
+
+            // 검색 기준에 따라 검색 필드 설정
+            if (searchCriteria =="작성자") {
+                searchCreatedBy = "createdBy";
+            } else if (searchCriteria == "내용") {
+                searchCommunityContent = "communityContent";
+            } else if (searchCriteria == "제목") {
+                searchName = "searchName";
+            }
+
+
+
+            // 페이지 이동
+            location.href = "/community/notice/list/" + page
+                + "?searchCreatedBy=" + searchCreatedBy
+                + "&searchCommunityContent=" + searchCommunityContent
+                + "&searchName=" + searchName + "&searchQuery="
+                + searchQuery;
+        }
+
+        function increaseViewCount(id) {
+            // 서버로 조회수 증가 요청을 보냅니다.
+            $.ajax({
+                type: 'POST',
+                url: '/community/notice/increaseViewCount/' + id,
+                success: function(response) {
+                    // 조회수 증가에 성공한 경우, 페이지를 이동합니다.
+                    window.location.href = '/community/notice/view/' + id;
+                }
+            });
+        }
+
+
+
+    </script>
+</th:block>
+<div layout:fragment="content">
+    <div class="blog-content">
+        <form th:action="@{'/community/notice/list/' +${noticeList.number}}" role="form" method="get"
+              th:object="${noticeList}">
+        <div id="Main-content">
+            <div id="Menutop">
+                <div id="M-top">
+                    <h1 >공지 사항</h1>
+                        <div class="form-inline justify-content-end" th:object="${noticeSearchDTO}">
+                            <select class="form-control" style="width: auto" id="searchCriteria" th:field="${noticeSearchDTO.searchCriteria}">
+                                <option value="작성자">작성자</option>
+                                <option value="내용">내용</option>
+                                <option value="제목">제목</option>
+                            </select>
+
+                            <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
+                            <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
+                        </div>
+
+                </div>
+            </div>
+            <div class="mx">
+                <table class="table">
+                    <thead class="thead-default">
+                    <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">글쓴이</th>
+                        <th scope="col">작성일</th>
+                        <th scope="col">조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="boardNotice : ${noticeList}">
+
+                        <td th:text="${boardNotice.id}" ></td>
+                    <td>
+                        <a th:text="${boardNotice.noticeTitle}+'['+${boardNotice.noticeReplies.size}+']'"
+                           th:href="@{'/community/notice/view/' + ${boardNotice.id}}"
+                           onclick="increaseViewCount(${boardNotice.id})"></a>
+                    </td>
+                        <td th:text="${boardNotice.member.memberNickname}">
+                        <td th:text="${#temporals.format(boardNotice.regTime,'yyyy-MM-dd')}"></td>
+                        <td th:text="${boardNotice.noticeViewCount}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination" th:if="${maxPage != 0}" th:with="start=${(noticeList.number/maxPage)*maxPage + 1},
+    end=(${(noticeList.totalPages == 0) ? 1 : (start + (maxPage - 1) < noticeList.totalPages ? start + (maxPage - 1) : noticeList.totalPages)})">
+                <ul>
+                    <li class="page-item">
+                        <a th:onclick="'javascript:page(0)'"
+                           aria-label='First' class="page-link">
+                            <span aria-hidden='true'>First</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${noticeList.first}?'disabled'">
+                        <a th:onclick="'javascript:page(' + ${noticeList.number - 1} + ')'"
+                           aria-label='Previous' class="page-link">
+                            <span aria-hidden='true'>Previous</span>
+                        </a>
+                    </li>
+
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
+                        th:classappend="${noticeList.number eq page - 1}?'active':''">
+                        <a th:onclick="'javascript:page(' + ${page - 1} + ')'"
+                           th:inline="text" class="page-link">[[${page}]]</a>
+                    </li>
+                    <li class="page-item" th:classappend="${noticeList.last}?'disabled'">
+                        <a th:onclick="'javascript:page(' + ${noticeList.number + 1} + ')'"
+                           aria-label='Next' class="page-link">
+                            <span aria-hidden='true'>Next</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a th:onclick="'javascript:page('+${noticeList.totalPages -1}+')'"
+                           aria-label='Last' class="page-link">
+                            <span aria-hidden='true'>Last</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="write-button-container">
+                <button id="write-button" sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a th:href="@{/community/admin/notice/new}">글작성</a></button>
+            </div>
+
+            </div>
+        </form>
+    </div>
+
+</div>
+</html>

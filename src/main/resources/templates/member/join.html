@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/basic/project.css">
+    <link rel="stylesheet" href="/css/basic/login.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/login/login.js"></script>
+</head>
+
+<body>
+<section class="header">
+
+    <nav>
+        <a href="index.html"></a>
+        <div class="nav-links" id="navLinks">
+
+            <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/schedule">schedule</a></li>
+                <li><a href="/community/board/list/">Community</a></li>
+                <li><a href="/community/notice/list">Notice</a></li>
+                <li sec:authorize="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')"><a href="/mypage">Mypage</a></li>
+                <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="/admin/list/">Admin</a></li>
+                <li sec:authorize="isAnonymous()"><a href="/member/login">로그인</a></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/members/logout">로그아웃</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
+    <div class="wrapper">
+        <div class="register-container" id="register">
+            <div class="top">
+                <span>계정이 있으신가요?<a href="/member/login" onclick="login()">로그인</a></span>
+                <header>회원가입</header>
+            </div>
+            <form method="POST" action="/member/join" id="joinform">
+                <div class="input-box join-box">
+                    <input type="text" class="input-field join" placeholder="닉네임을 입력하세요" name="nickName" required>
+                    <!-- <i class="fa-regular fa-user joini"></i> -->
+                    <span>
+                            <span class="btnright"><button type="button" name="nickName" id="nickName"
+                                                           class="eventbtn">닉네임 확인</button></span>
+
+                        </span>
+                </div>
+
+                <div class="input-box join-box">
+                    <input type="email" class="input-field join" placeholder="이메일을 입력하세요" id="email" name="email"
+                           required>
+                    <!-- <i class="fa-regular fa-envelope joini"></i> -->
+
+                    <span class="btnright"><button type="button" name="emailcheck" id="emailcheck"
+                                                   class="eventbtn">
+                        이메일 확인</button></span>
+
+                </div>
+
+
+                <div class="input-box join-box email-key">
+
+                    <input type="number" class="input-field join-number" placeholder="인증번호" name="verificationCode"
+                           required>
+                    <span class="smallright">
+                            <button type="button" name="sendVerificationCode" id="sendVerificationCode">인증번호발송</button>
+                        </span>
+
+
+                    <span class="btnright">
+                            <button type="button" name="confirmVerificationCode" id="confirmVerificationCode"
+                                    class="eventbtn">확인</button>
+                        </span>
+                </div>
+                <div id="timer" class="email-key input-box join-box"></div>
+
+
+                <div class="input-box join-box">
+                    <input type="password" class="input-field" placeholder="비밀번호를 입력하세요" name="password" required>
+                    <!-- <i class="fa-solid fa-lock joini"></i> -->
+                </div>
+
+                <div class="input-box join-box">
+                    <input type="password" class="input-field" placeholder="비밀번호를 다시 입력해주세요" name="password2"
+                           required>
+                    <!-- <i class="fa-solid fa-lock joini"></i> -->
+                </div>
+                <div class="input-box join-box">
+                    <input type="submit" class="submit" value="회원가입">
+                </div>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+            </form>
+        </div>
+
+
+    </div>
+</section>
+
+
+
+<!-- ======================FOOTER ---------------------------->
+<section class="footer">
+    <h4>About us</h4>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum rem eligendi <br> dicta vel exercitationem
+        dolorum, similique reiciendis asperiores quisquam, officiis, eaque aspernatur impedit ab possimus? Alias
+        quas ipsam sit earum.</p>
+    <div class="icons">
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+    </div>
+    <p>한정교 2조</p>
+</section>
+
+
+
+<!-- ----------------------------------------------JAVA SCRIPT FOR TOGGLE MENU----------------- -->
+<script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+    function hideMenu() {
+        navLinks.style.right = "-200px";
+    }
+
+</script>
+<script></script>
+<script src="https://kit.fontawesome.com/ba381d0ff2.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
